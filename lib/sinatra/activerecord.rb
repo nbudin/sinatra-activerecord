@@ -55,6 +55,10 @@ module Sinatra
       app.set :activerecord_logger, Logger.new(STDOUT)
       app.database # force connection
       app.helpers ActiveRecordHelper
+      
+      app.after do
+        ActiveRecord::Base.clear_active_connections!
+      end
     end
   end
 
